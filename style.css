@@ -80,6 +80,25 @@ html:not(.dark) {
   color: var(--color-secondary) !important;
 }
 
+/* --- Typography Hierarchy & Fallbacks --- */
+body, .font-body-md {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+.font-headline-xl {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  letter-spacing: -0.02em !important;
+}
+
+.font-headline-lg, .font-headline-lg-mobile {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  letter-spacing: -0.01em !important;
+}
+
+.font-code-md, .font-label-sm {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
 /* --- Global Elements & Overrides --- */
 body {
   background-color: var(--color-background);
