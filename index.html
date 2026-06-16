@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Thito Yalasatria Sunarya | Portfolio</title>
-  <meta name="description" content="Personal portfolio of Thito Yalasatria Sunarya - Flutter Developer and UI/UX Designer. Informatics graduate from ITENAS Bandung.">
+  <meta name="description" content="Personal portfolio of Thito Yalasatria Sunarya - Software Engineer, Game Developer, and UI/UX Designer. Informatics graduate from ITENAS Bandung.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -236,7 +236,7 @@
                 Thito Yalasatria Sunarya
               </h1>
               <div class="font-headline-lg text-headline-lg text-on-surface-variant opacity-90">
-                <span class="text-primary font-bold">Flutter Developer</span> &amp; <span class="text-syntax-teal font-bold">UI/UX Designer</span>
+                <span class="text-primary font-bold">Software Engineer</span>, <span class="text-syntax-teal font-bold">Game Developer</span>, and <span class="text-syntax-blue font-bold">UI/UX Designer</span>
               </div>
               <div class="max-w-3xl font-body-md text-body-md text-on-surface-variant leading-relaxed text-[16px]">
                 I am an Informatics engineering graduate from ITENAS Bandung with a 3.89 GPA. I have four years of experience building applications in the Flutter framework and eight years of experience working with the Java ecosystem. My software engineering practice focuses on designing custom cross-platform tools, creating clean user interfaces, and integrating machine learning classifiers locally.
@@ -443,16 +443,27 @@
 
               <div class="space-y-6">
                 <!-- Kemenkes Hackathon -->
-                <div class="bg-surface border border-technical p-6 hover:bg-surface-container-low transition-colors rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <div class="font-code-md text-code-md text-primary mb-1">Honorable Winner</div>
-                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Kemenkes Hackathon AI/ML (Oct 2025)</h3>
-                    <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
-                      Developed a health game that suggests custom activity plans based on daily actions and stroke risk models. Built prediction models in Python and integrated them with a Spring Boot Java server.
-                    </p>
+                <div class="bg-surface border border-technical p-6 hover:bg-surface-container-low transition-colors rounded-sm flex flex-col md:flex-row gap-6 items-stretch">
+                  <div class="flex-1 flex flex-col justify-between">
+                    <div>
+                      <div class="font-code-md text-code-md text-primary mb-1">Honorable Winner</div>
+                      <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Kemenkes Hackathon AI/ML (Oct 2025)</h3>
+                      <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+                        Developed a health game that suggests custom activity plans based on daily actions and stroke risk models. Built prediction models in Python and integrated them with a Spring Boot Java server.
+                      </p>
+                    </div>
+                    <div class="mt-4 flex items-center gap-2 font-code-md text-code-md text-primary">
+                      <span class="material-symbols-outlined text-[18px]">military_tech</span>
+                      <span>Honorable Winner</span>
+                    </div>
                   </div>
-                  <div class="w-12 h-12 border border-technical rounded-full flex items-center justify-center shrink-0">
-                    <span class="material-symbols-outlined text-xl text-primary">military_tech</span>
+                  <div class="shrink-0 flex items-center justify-center">
+                    <div class="relative group overflow-hidden border border-technical rounded-sm w-full md:w-48 h-32 bg-surface-container-high cursor-pointer" onclick="openMediaModal('image', 'kemenkeshackathon.JPG', 'Kemenkes Hackathon Winner Announcement')">
+                      <img src="kemenkeshackathon.JPG" alt="Kemenkes Hackathon Winner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -522,6 +533,27 @@
                     In my internship at PT Surya Energi Indotama, I performed the full UI/UX design workflow for the company ERP modules. I created wireframes and high-fidelity mockups in Figma, ensuring design usability prior to writing any frontend code.
                   </p>
                 </div>
+
+                <!-- Certification Card -->
+                <div class="bg-surface border border-technical p-6 rounded-sm md:col-span-2 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                  <div class="space-y-1">
+                    <div class="font-code-md text-code-md text-syntax-teal font-semibold">Google UX Design Certificate</div>
+                    <div class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Coursera Professional Certificate</div>
+                    <p class="font-body-md text-body-md text-on-surface-variant text-sm mt-2 leading-relaxed">
+                      Completed professional coursework in UX research, user journey mapping, wireframing, high-fidelity prototyping, and usability testing using Figma.
+                    </p>
+                  </div>
+                  <div class="shrink-0 flex gap-3 w-full sm:w-auto">
+                    <button onclick="openMediaModal('pdf', 'sertifkeahlian.pdf', 'Google UX Design Professional Certificate')" class="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 border border-technical hover:border-syntax-teal hover:text-syntax-teal rounded-sm transition-colors font-code-md text-code-md bg-surface-container-low cursor-pointer select-none">
+                      <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                      <span>View (PDF)</span>
+                    </button>
+                    <a href="sertifkeahlian.pdf" download="Thito_UX_Design_Certificate.pdf" class="flex items-center justify-center gap-2 px-4 py-2.5 border border-technical hover:border-primary hover:text-primary rounded-sm transition-colors font-code-md text-code-md bg-surface-container-low select-none">
+                      <span class="material-symbols-outlined text-[18px]">download</span>
+                      <span>Download</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -581,6 +613,21 @@
 
   <!-- Sidebar Overlay for Mobile View -->
   <div class="hidden fixed inset-0 bg-black/60 z-30" id="sidebar-overlay"></div>
+
+  <!-- Media Modal (Image/PDF Viewer) -->
+  <div id="media-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div class="relative bg-surface border border-technical rounded-sm max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="border-b border-technical px-4 py-3 flex justify-between items-center bg-surface-container-low">
+        <span id="modal-title" class="font-code-md text-on-surface">Viewer</span>
+        <button id="modal-close" class="text-on-surface-variant hover:text-on-surface material-symbols-outlined text-[20px] cursor-pointer">close</button>
+      </div>
+      <!-- Modal Content -->
+      <div class="flex-1 overflow-auto p-6 flex justify-center items-center bg-background" id="modal-content">
+        <!-- Dynamically filled -->
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="app.js"></script>

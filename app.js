@@ -275,6 +275,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Media Modal Logic ---
+  const mediaModal = document.getElementById('media-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalContent = document.getElementById('modal-content');
+  const modalClose = document.getElementById('modal-close');
+
+  function openMediaModal(type, src, titleText) {
+    if (!mediaModal || !modalTitle || !modalContent) return;
+    
+    modalTitle.textContent = titleText;
+    modalContent.innerHTML = '';
+    
+    if (type === 'image') {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = titleText;
+      img.className = 'max-w-full max-h-[70vh] object-contain rounded-sm border border-technical';
+      modalContent.appendChild(img);
+    } else if (type === 'pdf') {
+      const embed = document.createElement('embed');
+      embed.src = src;
+      embed.type = 'application/pdf';
+      embed.className = 'w-full h-[70vh] rounded-sm';
+      modalContent.appendChild(embed);
+    }
+    
+    mediaModal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function closeMediaModal() {
+    if (!mediaModal) return;
+    mediaModal.classList.add('hidden');
+    if (modalContent) modalContent.innerHTML = '';
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeMediaModal);
+  }
+  if (mediaModal) {
+    mediaModal.addEventListener('click', (e) => {
+      if (e.target === mediaModal) {
+        closeMediaModal();
+      }
+    });
+  }
+
+  // Expose to window for inline onclick handlers
+  window.openMediaModal = openMediaModal;
+  window.closeMediaModal = closeMediaModal;
+
   // --- GitHub Star Count Fetcher ---
   async function fetchRepoStars(repoName, elementId, fallbackCount) {
     const starSpan = document.getElementById(elementId);
