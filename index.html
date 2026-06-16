@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Thito Yalasatria Sunarya | Portfolio</title>
+  <meta name="description" content="Personal portfolio of Thito Yalasatria Sunarya - Flutter Developer and UI/UX Designer. Informatics graduate from ITENAS Bandung.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  
+  <!-- Google Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind Config using CSS variables for theme switching -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "var(--color-primary)",
+            "secondary": "var(--color-secondary)",
+            "tertiary": "var(--color-tertiary)",
+            "background": "var(--color-background)",
+            "surface": "var(--color-surface)",
+            "surface-container-low": "var(--color-surface-container-low)",
+            "surface-container-high": "var(--color-surface-container-high)",
+            "surface-container-highest": "var(--color-surface-container-highest)",
+            "outline-variant": "var(--color-outline-variant)",
+            "on-surface": "var(--color-on-surface)",
+            "on-surface-variant": "var(--color-on-surface-variant)",
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-safe": "40px",
+            "unit": "4px",
+            "gutter": "24px",
+            "container-max": "1280px"
+          },
+          "fontFamily": {
+            "headline-xl": ["Geist"],
+            "label-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Geist"],
+            "code-md": ["JetBrains Mono"],
+            "body-md": ["Geist"],
+            "headline-lg": ["Geist"]
+          },
+          "fontSize": {
+            "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "code-md": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex flex-col">
+
+  <!-- IDE Window Title Bar (Top of Window - Compact 36px) -->
+  <header class="bg-surface h-9 flex items-center justify-between px-6 border-b border-outline-variant select-none flex-shrink-0">
+    <div class="flex items-center gap-2 w-24">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block"></span>
+    </div>
+    
+    <div class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+      thito-portfolio - IDE Workspace
+    </div>
+    
+    <div class="flex items-center justify-end w-24">
+      <button id="theme-toggle" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="Toggle dark/light theme">
+        <span class="material-symbols-outlined text-[18px]">light_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- IDE Workspace Area -->
+  <div class="flex flex-1 overflow-hidden relative">
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="md:hidden fixed bottom-10 right-4 z-50 bg-primary text-on-surface rounded-full px-4 py-3 flex items-center gap-2 font-label-sm text-label-sm uppercase tracking-widest shadow-lg" id="mobile-menu-toggle">
+      <span class="material-symbols-outlined text-[18px]">folder_open</span>
+      <span>Explorer</span>
+    </button>
+
+    <!-- Sidebar File Explorer -->
+    <aside class="hidden md:flex flex-col bg-surface-container-low h-full w-[250px] border-r border-outline-variant flex-shrink-0 relative z-40 select-none overflow-y-auto custom-scroll" id="ide-sidebar">
+      <a href="https://github.com/sunarya-thito" target="_blank" rel="noopener" class="p-3 border-b border-outline-variant flex items-center gap-3 hover:bg-surface-container-high transition-colors">
+        <img src="https://github.com/sunarya-thito.png" alt="Thito Yalasatria Sunarya" class="w-7 h-7 rounded-full border border-outline-variant shrink-0" />
+        <div>
+          <div class="font-label-sm text-label-sm font-bold text-primary">@sunarya-thito</div>
+          <div class="font-label-sm text-[11px] text-on-surface-variant opacity-70">Thito Yalasatria Sunarya</div>
+        </div>
+      </a>
+      
+      <div class="flex-1 py-2">
+        <div class="font-label-sm text-[11px] text-on-surface-variant px-4 py-1.5 opacity-50 uppercase tracking-widest">EXPLORER</div>
+        
+        <!-- Folder Tree (styled for edge-to-edge highlights via CSS) -->
+        <div class="flex flex-col" id="file-list">
+          
+          <!-- Root Folder Container -->
+          <div class="tree-folder" id="folder-root">
+            <div class="tree-node folder py-1.5 pl-4 flex items-center gap-1">
+              <span class="material-symbols-outlined arrow text-[14px]">keyboard_arrow_down</span>
+              <span class="material-symbols-outlined icon text-[16px] text-primary">folder_open</span>
+              <span>thito-portfolio</span>
+            </div>
+            
+            <!-- Root Folder Content -->
+            <div class="folder-content">
+              <!-- Src Folder Container -->
+              <div class="tree-folder" id="folder-src">
+                <div class="tree-node folder py-1.5 pl-8 flex items-center gap-1">
+                  <span class="material-symbols-outlined arrow text-[14px]">keyboard_arrow_down</span>
+                  <span class="material-symbols-outlined icon text-[16px] text-primary">folder_open</span>
+                  <span>src</span>
+                </div>
+                
+                <!-- Src Folder Content -->
+                <div class="folder-content">
+                  <!-- Files (Edge-to-edge highlights styled in CSS) -->
+                  <div class="tree-node file active pl-[50px] py-2 flex items-center gap-2 cursor-pointer" data-file="main.dart">
+                    <span class="material-symbols-outlined text-[16px]">description</span>
+                    <span>main.dart</span>
+                  </div>
+                  
+                  <div class="tree-node file pl-[50px] py-2 flex items-center gap-2 cursor-pointer" data-file="experience.java">
+                    <span class="material-symbols-outlined text-[16px]">code</span>
+                    <span>experience.java</span>
+                  </div>
+                  
+                  <div class="tree-node file pl-[50px] py-2 flex items-center gap-2 cursor-pointer" data-file="achievements.py">
+                    <span class="material-symbols-outlined text-[16px]">emoji_events</span>
+                    <span>achievements.py</span>
+                  </div>
+                  
+                  <div class="tree-node file pl-[50px] py-2 flex items-center gap-2 cursor-pointer" data-file="design.figma">
+                    <span class="material-symbols-outlined text-[16px]">draw</span>
+                    <span>design.figma</span>
+                  </div>
+                  
+                  <div class="tree-node file pl-[50px] py-2 flex items-center gap-2 cursor-pointer" data-file="contact.json">
+                    <span class="material-symbols-outlined text-[16px]">alternate_email</span>
+                    <span>contact.json</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </aside>
+
+    <!-- Editor Workspace (Tabs at the top of this viewport) -->
+    <main class="flex-1 flex flex-col bg-background overflow-hidden" id="editor-viewport">
+      
+      <!-- Editor Tabs Bar (Sits inside the editor container above breadcrumbs) -->
+      <div class="bg-surface-container-low flex items-stretch w-full h-9 overflow-x-auto border-b border-outline-variant select-none custom-scroll flex-shrink-0" id="tab-bar">
+        <div class="editor-tab active" data-file="main.dart">
+          <span class="material-symbols-outlined mr-2 text-[16px]">description</span>
+          <span class="font-code-md">main.dart</span>
+          <span class="material-symbols-outlined ml-2 text-[14px] opacity-50 hover:opacity-100 tab-close-btn" data-close="main.dart">close</span>
+        </div>
+        <div class="editor-tab" data-file="experience.java">
+          <span class="material-symbols-outlined mr-2 text-[16px]">code</span>
+          <span class="font-code-md">experience.java</span>
+          <span class="material-symbols-outlined ml-2 text-[14px] opacity-50 hover:opacity-100 tab-close-btn" data-close="experience.java">close</span>
+        </div>
+        <div class="editor-tab" data-file="achievements.py">
+          <span class="material-symbols-outlined mr-2 text-[16px]">emoji_events</span>
+          <span class="font-code-md">achievements.py</span>
+          <span class="material-symbols-outlined ml-2 text-[14px] opacity-50 hover:opacity-100 tab-close-btn" data-close="achievements.py">close</span>
+        </div>
+        <div class="editor-tab" data-file="design.figma">
+          <span class="material-symbols-outlined mr-2 text-[16px]">draw</span>
+          <span class="font-code-md">design.figma</span>
+          <span class="material-symbols-outlined ml-2 text-[14px] opacity-50 hover:opacity-100 tab-close-btn" data-close="design.figma">close</span>
+        </div>
+        <div class="editor-tab" data-file="contact.json">
+          <span class="material-symbols-outlined mr-2 text-[16px]">alternate_email</span>
+          <span class="font-code-md">contact.json</span>
+          <span class="material-symbols-outlined ml-2 text-[14px] opacity-50 hover:opacity-100 tab-close-btn" data-close="contact.json">close</span>
+        </div>
+      </div>
+
+      <!-- Breadcrumbs (Compact 26px) -->
+      <div class="bg-background border-b border-technical px-6 flex items-center gap-2 select-none flex-shrink-0 z-30 breadcrumb-bar">
+        <span class="font-label-sm text-[11px] text-on-surface-variant">thito-portfolio</span>
+        <span class="material-symbols-outlined text-on-surface-variant text-[12px]">chevron_right</span>
+        <span class="font-label-sm text-[11px] text-on-surface-variant">src</span>
+        <span class="material-symbols-outlined text-on-surface-variant text-[12px]">chevron_right</span>
+        <span class="font-label-sm text-[11px] text-primary" id="breadcrumb-active-file">main.dart</span>
+      </div>
+
+      <!-- Scrollable Code Area -->
+      <div class="flex-1 overflow-y-auto custom-scroll relative">
+        <!-- Full-height Flex Wrapper to prevent background/border cut-off on scroll -->
+        <div class="flex min-h-full items-stretch">
+          
+          <!-- Line Numbers Column -->
+          <div class="hidden sm:flex" id="line-numbers-container">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Rendered File content pane -->
+          <div class="flex-1 p-6 md:p-12 lg:p-16 max-w-container-max mx-auto w-full" id="content-container">
+          
+          <!-- main.dart Content (Overview & Details) -->
+          <div class="code-block active space-y-16" id="code-main.dart">
+            <div class="font-code-md text-code-md text-on-surface-variant mb-4">
+              <span class="text-syntax-blue">import</span> <span class="string">'package:portfolio/biography.dart'</span>;
+            </div>
+            
+            <section class="space-y-6">
+              <h1 class="font-headline-xl text-headline-xl text-on-surface">
+                Thito Yalasatria Sunarya
+              </h1>
+              <div class="font-headline-lg text-headline-lg text-on-surface-variant opacity-90">
+                <span class="text-primary font-bold">Flutter Developer</span> &amp; <span class="text-syntax-teal font-bold">UI/UX Designer</span>
+              </div>
+              <div class="max-w-3xl font-body-md text-body-md text-on-surface-variant leading-relaxed text-[16px]">
+                I am an Informatics engineering graduate from ITENAS Bandung with a 3.89 GPA. I have four years of experience building applications in the Flutter framework and eight years of experience working with the Java ecosystem. My software engineering practice focuses on designing custom cross-platform tools, creating clean user interfaces, and integrating machine learning classifiers locally.
+              </div>
+            </section>
+
+            <!-- Education and Core Focus Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+              <!-- Education Block -->
+              <section class="flex flex-col h-full space-y-4">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3 border-b border-technical pb-2">
+                  <span class="material-symbols-outlined text-primary">school</span>
+                  <span>Education</span>
+                </h2>
+                <div class="bg-surface border border-technical p-6 rounded-sm space-y-4 flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-semibold">Institut Teknologi Nasional (ITENAS)</h3>
+                    <div class="font-code-md text-code-md text-primary mt-1">B.S. in Informatics Engineering</div>
+                    <div class="font-label-sm text-label-sm text-on-surface-variant opacity-70 mt-1">Graduated with a 3.89 GPA</div>
+                  </div>
+                  <div class="space-y-2 pt-4 border-t border-technical">
+                    <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">RELEVANT COURSEWORK</div>
+                    <ul class="list-disc pl-5 font-body-md text-body-md text-on-surface-variant text-sm space-y-1">
+                      <li>Algorithms &amp; Data Structures</li>
+                      <li>Object-Oriented Programming (Java)</li>
+                      <li>Software Architecture &amp; Engineering Patterns</li>
+                      <li>Mobile Application Development</li>
+                      <li>Database Management Systems &amp; SQL</li>
+                      <li>On-Device Deep Learning &amp; CNNs</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Technical Toolkit Block -->
+              <section class="flex flex-col h-full space-y-4">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3 border-b border-technical pb-2">
+                  <span class="material-symbols-outlined text-syntax-teal">terminal</span>
+                  <span>Technical Toolkit</span>
+                </h2>
+                <div class="bg-surface border border-technical p-6 rounded-sm space-y-4 flex-grow flex flex-col justify-between">
+                  <div class="space-y-3">
+                    <div>
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">PROGRAMMING LANGUAGES</div>
+                      <p class="font-code-md text-code-md text-primary mt-1">Dart, Java, Python, C++, Go, HTML/CSS/JavaScript, SQL</p>
+                    </div>
+                    <div class="pt-4 border-t border-technical">
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">FRAMEWORKS &amp; LIBRARIES</div>
+                      <p class="font-code-md text-code-md text-syntax-teal mt-1">Flutter, Spring Boot (Java), PyTorch</p>
+                    </div>
+                    <div class="pt-4 border-t border-technical">
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">DEVELOPER TOOLS &amp; DESIGN</div>
+                      <p class="font-code-md text-code-md text-syntax-blue mt-1">Git, GitHub, GitLab, Figma, CorelDRAW, Android Studio, VS Code</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Open Source Modules -->
+            <section class="space-y-8">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-syntax-teal">public</span>
+                <span>Open Source Projects</span>
+              </h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- shadcn_flutter -->
+                <div class="bg-surface border border-technical p-6 hover:border-primary transition-colors flex flex-col justify-between rounded-sm">
+                  <div>
+                    <div class="flex justify-between items-start mb-4">
+                      <span class="font-code-md text-code-md text-primary font-bold">shadcn_flutter</span>
+                      <a href="https://github.com/sunarya-thito/shadcn_flutter" target="_blank" rel="noopener" class="text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">arrow_outward</span>
+                      </a>
+                    </div>
+                    <h3 class="font-body-md text-body-md text-on-surface font-semibold mb-2">UI Component Library</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant opacity-80 text-sm">
+                      A complete port of the shadcn/ui design system to Flutter. It provides fully customizable and accessible UI components.
+                    </p>
+                  </div>
+                  <div class="mt-6 flex justify-between items-center">
+                    <div class="flex gap-2">
+                      <span class="px-2 py-0.5 tag-primary font-label-sm text-label-sm uppercase rounded-sm">Dart</span>
+                      <span class="px-2 py-0.5 bg-surface-container-high border border-technical text-on-surface-variant font-label-sm text-label-sm uppercase rounded-sm">UI/UX</span>
+                    </div>
+                    <div class="flex items-center gap-1 font-code-md text-code-md text-syntax-amber">
+                      <span class="material-symbols-outlined text-[16px]">star</span>
+                      <span id="stars-shadcn_flutter">888</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- goo2d -->
+                <div class="bg-surface border border-technical p-6 hover:border-secondary transition-colors flex flex-col justify-between rounded-sm">
+                  <div>
+                    <div class="flex justify-between items-start mb-4">
+                      <span class="font-code-md text-code-md text-secondary font-bold">goo2d</span>
+                      <a href="https://github.com/sunarya-thito/goo2d" target="_blank" rel="noopener" class="text-on-surface-variant hover:text-secondary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">arrow_outward</span>
+                      </a>
+                    </div>
+                    <h3 class="font-body-md text-body-md text-on-surface font-semibold mb-2">2D Game Engine</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant opacity-80 text-sm">
+                      A lightweight 2D game engine built natively in Flutter for fast rendering and custom game loops.
+                    </p>
+                  </div>
+                  <div class="mt-6 flex justify-between items-center">
+                    <div class="flex gap-2">
+                      <span class="px-2 py-0.5 tag-secondary font-label-sm text-label-sm uppercase rounded-sm">Flutter</span>
+                      <span class="px-2 py-0.5 bg-surface-container-high border border-technical text-on-surface-variant font-label-sm text-label-sm uppercase rounded-sm">GameDev</span>
+                    </div>
+                    <div class="flex items-center gap-1 font-code-md text-code-md text-syntax-amber">
+                      <span class="material-symbols-outlined text-[16px]">star</span>
+                      <span id="stars-goo2d">12</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- GitHub Contributions Calendar -->
+            <section class="space-y-4 pt-12 border-t border-technical mt-12">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-primary">calendar_month</span>
+                <span>GitHub Contributions</span>
+              </h2>
+              <div class="bg-surface border border-technical p-6 rounded-sm overflow-x-auto custom-scroll">
+                <div class="min-w-[670px] select-none pointer-events-none">
+                  <img src="https://ghchart.rshah.org/ff6565/sunarya-thito" alt="sunarya-thito's GitHub contributions" class="w-full h-auto github-calendar-img" loading="lazy" />
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- experience.java Content (Enterprise log card) -->
+          <div class="code-block space-y-12" id="code-experience.java">
+            <div class="font-code-md text-code-md text-on-surface-variant mb-4">
+              <span class="text-syntax-blue">package</span> <span class="text-on-surface">com.thito.experience</span>;
+            </div>
+
+            <section class="space-y-6">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-primary">business_center</span>
+                <span>Work Experience</span>
+              </h2>
+              
+              <div class="bg-surface border border-technical overflow-hidden rounded-sm">
+                <!-- Log Header -->
+                <div class="border-b border-technical px-6 py-3 flex justify-between items-center bg-surface-container-low select-none">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-on-surface-variant text-[18px]">terminal</span>
+                    <span class="font-code-md text-code-md text-on-surface">PT_SEI_Internship.log</span>
+                  </div>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Feb - June 2024</span>
+                </div>
+                <!-- Log Body -->
+                <div class="p-6 md:p-8 space-y-6">
+                  <div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">PT Surya Energi Indotama</h3>
+                    <div class="font-code-md text-code-md text-syntax-teal mt-1">Software Engineer Intern (MSIB Batch 6)</div>
+                  </div>
+                  
+                  <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Designed the UI/UX in Figma and developed features for the company's internal ERP systems, working inside GitLab repositories.
+                  </p>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-technical">
+                    <div class="space-y-2">
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">MODULES COMPLETED</div>
+                      <ul class="list-disc pl-5 font-body-md text-body-md text-on-surface-variant space-y-1">
+                        <li><strong>Attendance System:</strong> Tracked check-ins using mobile GPS and on-site fingerprint scanners.</li>
+                        <li><strong>Leave Requests:</strong> Built the workflow for leave application and approvals.</li>
+                        <li><strong>Vehicle Bookings:</strong> Developed the travel vehicle request and allocation system.</li>
+                      </ul>
+                    </div>
+                    <div class="space-y-4">
+                      <div>
+                        <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">TECHNOLOGY STACK</div>
+                        <div class="font-code-md text-code-md text-primary mt-1">Flutter (Mobile), Spring Boot Java (Backend)</div>
+                      </div>
+                      <div>
+                        <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">UI/UX DESIGN</div>
+                        <div class="font-code-md text-code-md text-syntax-teal mt-1">Designed layouts and prototypes in Figma prior to system coding.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- achievements.py Content -->
+          <div class="code-block space-y-12" id="code-achievements.py">
+            <div class="font-code-md text-code-md text-on-surface-variant mb-4">
+              <span class="text-syntax-comment"># achievements.py</span>
+            </div>
+
+            <section class="space-y-8">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-tertiary">emoji_events</span>
+                <span>Achievements &amp; Side Projects</span>
+              </h2>
+
+              <div class="space-y-6">
+                <!-- Kemenkes Hackathon -->
+                <div class="border border-technical p-6 hover:bg-surface-container-low transition-colors rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <div class="font-code-md text-code-md text-primary mb-1">Honorable Winner</div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Kemenkes Hackathon AI/ML (Oct 2025)</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+                      Developed a health game that suggests custom activity plans based on daily actions and stroke risk models. Built prediction models in Python and integrated them with a Spring Boot Java server.
+                    </p>
+                  </div>
+                  <div class="w-12 h-12 border border-technical rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-xl text-primary">military_tech</span>
+                  </div>
+                </div>
+
+                <!-- Local CNN Classifier -->
+                <div class="border border-technical p-6 hover:bg-surface-container-low transition-colors rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <div class="font-code-md text-code-md text-syntax-teal mb-1">Academic Project</div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">On-Device CNN Classifier</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+                      Optimized and deployed a MobileNet convolutional neural network model to run locally on a Flutter app for on-device real-time image classification.
+                    </p>
+                  </div>
+                  <div class="w-12 h-12 border border-technical rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-xl text-syntax-teal">memory</span>
+                  </div>
+                </div>
+
+                <!-- IoT Air Monitoring -->
+                <div class="border border-technical p-6 hover:bg-surface-container-low transition-colors rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <div class="font-code-md text-code-md text-primary mb-1">Hardware Project</div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Air Quality Monitor</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+                      Built an environmental monitoring node using an ESP32 microcontroller and an array of air sensors to collect and report air quality parameters.
+                    </p>
+                  </div>
+                  <div class="w-12 h-12 border border-technical rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-xl text-primary">sensors</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- design.figma Content -->
+          <div class="code-block space-y-12" id="code-design.figma">
+            <div class="font-code-md text-code-md text-on-surface-variant mb-4">
+              <span class="text-syntax-comment">; design.figma - UI/UX Design System configs</span>
+            </div>
+
+            <section class="space-y-6">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-syntax-teal">draw</span>
+                <span>Design Experience</span>
+              </h2>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Skillset Card -->
+                <div class="bg-surface border border-technical p-6 rounded-sm">
+                  <h3 class="font-code-md text-code-md text-primary font-bold mb-4">Design Skills &amp; Software</h3>
+                  <div class="space-y-4">
+                    <div>
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">PROFESSIONAL EXPERIENCE</div>
+                      <div class="font-code-md text-code-md text-syntax-teal mt-1">Figma, CorelDRAW</div>
+                    </div>
+                    <div>
+                      <div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">GENERAL KNOWLEDGE</div>
+                      <div class="font-code-md text-code-md text-syntax-blue mt-1">Blender</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Case Study Card -->
+                <div class="bg-surface border border-technical p-6 rounded-sm">
+                  <h3 class="font-code-md text-code-md text-secondary font-bold mb-4">Practical Application</h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant opacity-90 text-sm">
+                    In my internship at PT Surya Energi Indotama, I performed the full UI/UX design workflow for the company ERP modules. I created wireframes and high-fidelity mockups in Figma, ensuring design usability prior to writing any frontend code.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- contact.json Content -->
+          <div class="code-block space-y-12" id="code-contact.json">
+            <div class="font-code-md text-code-md text-on-surface-variant mb-4">
+              { <span class="text-syntax-comment">"contact_details"</span> }
+            </div>
+
+            <section class="space-y-8">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4 border-b border-technical pb-2">
+                <span class="material-symbols-outlined text-tertiary">alternate_email</span>
+                <span>Contact Details</span>
+              </h2>
+
+              <div class="bg-surface border border-technical p-6 max-w-xl rounded-sm">
+                <table class="w-full text-left font-code-md text-code-md leading-loose">
+                  <tbody>
+                    <tr>
+                      <th class="font-semibold text-on-surface-variant opacity-60 pr-6 w-1/4">Email:</th>
+                      <td><a href="mailto:thitoyalasatria@gmail.com" class="code-link">thitoyalasatria@gmail.com</a></td>
+                    </tr>
+                    <tr>
+                      <th class="font-semibold text-on-surface-variant opacity-60 pr-6 w-1/4">GitHub:</th>
+                      <td><a href="https://github.com/sunarya-thito" target="_blank" rel="noopener" class="code-link">github.com/sunarya-thito</a></td>
+                    </tr>
+                    <tr>
+                      <th class="font-semibold text-on-surface-variant opacity-60 pr-6 w-1/4">Status:</th>
+                      <td class="text-syntax-teal">Available for developer or UI/UX design opportunities.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  </div>
+
+  <!-- Bottom Status Bar -->
+  <footer class="bg-surface-container w-full h-6 flex justify-between items-center px-4 z-50 border-t border-outline-variant select-none text-xs text-on-surface-variant font-label-sm flex-shrink-0">
+    <div class="font-bold flex items-center gap-1">
+      <span class="material-symbols-outlined text-[14px]">account_tree</span>
+      <span>READY // git: main</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="opacity-80">UTF-8</span>
+      <span class="opacity-80">Spaces: 2</span>
+      <span class="opacity-80 font-bold" id="footer-lang">Dart</span>
+    </div>
+  </footer>
+
+  <!-- Sidebar Overlay for Mobile View -->
+  <div class="hidden fixed inset-0 bg-black/60 z-30" id="sidebar-overlay"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

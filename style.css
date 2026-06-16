@@ -1,0 +1,355 @@
+/* --- Custom Theme Design Tokens (CSS Variables) --- */
+:root {
+  /* Default: Dark Theme colors */
+  --color-background: #121214;
+  --color-surface: #18181b;
+  --color-surface-container-low: #18181b;
+  --color-surface-container-high: #27272a;
+  --color-surface-container-highest: #3f3f46;
+  --color-outline-variant: #27272a;
+  
+  --color-on-surface: #f4f4f5;
+  --color-on-surface-variant: #a1a1aa;
+  
+  --color-primary: #ff6565;       /* Red Accent */
+  --color-secondary: #2dd4bf;     /* Teal */
+  --color-tertiary: #60a5fa;      /* Blue */
+  
+  --color-line-num: #52525b;      /* Dark Line Numbers */
+  --color-syntax-comment: #71717a;
+  --color-syntax-string: #a7f3d0;
+  
+  /* Tag colors with opacity */
+  --color-tag-primary-bg: rgba(255, 101, 101, 0.1);
+  --color-tag-primary-border: rgba(255, 101, 101, 0.2);
+  --color-tag-secondary-bg: rgba(45, 212, 191, 0.1);
+  --color-tag-secondary-border: rgba(45, 212, 191, 0.2);
+
+  /* Selected Text Selection (Rose) */
+  --color-selection-bg: rgba(244, 63, 94, 0.25);
+  --color-selection-text: #fb7185;
+}
+
+/* Light Theme overrides (active when class="dark" is NOT present on <html>) */
+html:not(.dark) {
+  --color-background: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-surface-container-low: #fafafa;
+  --color-surface-container-high: #e4e4e7;
+  --color-surface-container-highest: #d4d4d8;
+  --color-outline-variant: #e4e4e7;
+  
+  --color-on-surface: #09090b;
+  --color-on-surface-variant: #71717a;
+  
+  --color-primary: #dc2626;       /* Dark Red */
+  --color-secondary: #0d9488;     /* Dark Teal */
+  --color-tertiary: #2563eb;      /* Dark Blue */
+  
+  --color-line-num: #a1a1aa;      /* Light Line Numbers */
+  --color-syntax-comment: #a1a1aa;
+  --color-syntax-string: #047857;
+  
+  /* Tag colors with opacity */
+  --color-tag-primary-bg: rgba(220, 38, 38, 0.08);
+  --color-tag-primary-border: rgba(220, 38, 38, 0.2);
+  --color-tag-secondary-bg: rgba(13, 148, 136, 0.08);
+  --color-tag-secondary-border: rgba(13, 148, 136, 0.2);
+
+  /* Selected Text Selection (Rose) */
+  --color-selection-bg: rgba(225, 29, 72, 0.15);
+  --color-selection-text: #e11d48;
+}
+
+/* Global browser selection styling using rose tones */
+::selection {
+  background-color: var(--color-selection-bg) !important;
+  color: var(--color-selection-text) !important;
+}
+
+/* Tag utility classes */
+.tag-primary {
+  background-color: var(--color-tag-primary-bg) !important;
+  border: 1px solid var(--color-tag-primary-border) !important;
+  color: var(--color-primary) !important;
+}
+
+.tag-secondary {
+  background-color: var(--color-tag-secondary-bg) !important;
+  border: 1px solid var(--color-tag-secondary-border) !important;
+  color: var(--color-secondary) !important;
+}
+
+/* --- Global Elements & Overrides --- */
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.border-technical {
+  border-color: var(--color-outline-variant) !important;
+}
+
+/* Custom Scrollbars */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: var(--color-surface-container-low);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 3px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-container-highest);
+}
+
+/* --- Title Bar Adjustments --- */
+header {
+  height: 36px !important; /* Compact header */
+}
+
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+}
+
+#theme-toggle:hover {
+  background-color: var(--color-surface-container-high);
+}
+
+#theme-toggle span {
+  display: block;
+}
+
+/* --- Sidebar File Explorer & Collapsible Folders --- */
+.tree-folder .folder-content {
+  display: block;
+}
+
+.tree-folder.collapsed > .folder-content {
+  display: none;
+}
+
+.tree-folder .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease;
+}
+
+.tree-folder.collapsed > .tree-node.folder .arrow {
+  transform: rotate(-90deg);
+}
+
+.tree-node {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  font-size: 13px !important;
+  font-family: 'JetBrains Mono', monospace;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  line-height: 1.5;
+}
+
+.tree-node.folder {
+  color: var(--color-on-surface-variant);
+  user-select: none;
+}
+
+.tree-node.folder:hover {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}
+
+.tree-node.file {
+  color: var(--color-on-surface-variant);
+  user-select: none;
+}
+
+.tree-node.file:hover {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}
+
+/* Active file: Inset shadow creates the left-border marker without shifting contents */
+.tree-node.file.active {
+  background-color: var(--color-surface-container-highest) !important;
+  color: var(--color-primary) !important;
+  font-weight: 500;
+  box-shadow: inset 3px 0 0 0 var(--color-primary);
+}
+
+/* --- Editor Tabs Bar & Tabs --- */
+#tab-bar {
+  background-color: var(--color-surface-container-low);
+  display: flex;
+  align-items: stretch;
+  height: 36px;
+  border-bottom: 1px solid var(--color-outline-variant);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.85rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px !important;
+  color: var(--color-on-surface-variant);
+  border-right: 1px solid var(--color-outline-variant);
+  border-top: 2px solid transparent; /* Prevents shifting when selected */
+  border-bottom: 1px solid transparent; /* Prevents shifting when selected */
+  margin-bottom: -1px; /* Pull down to overlay the tab-bar border */
+  background-color: var(--color-surface-container-low);
+  transition: background-color 0.12s ease, color 0.12s ease;
+  user-select: none;
+}
+
+.editor-tab:hover {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+}
+
+.editor-tab.active {
+  background-color: var(--color-background) !important;
+  color: var(--color-primary) !important;
+  border-top-color: var(--color-primary) !important;
+  border-bottom-color: var(--color-background) !important;
+}
+
+.tab-close-btn {
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Breadcrumbs Bar --- */
+.breadcrumb-bar {
+  height: 26px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+/* --- Line Numbers Column --- */
+#line-numbers-container {
+  width: 44px;
+  border-right: 1px solid var(--color-outline-variant) !important;
+  background-color: var(--color-background);
+  padding-top: 1.5rem;
+  padding-bottom: 8rem !important; /* Matches content-container padding-bottom */
+  user-select: none;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  #line-numbers-container {
+    padding-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #line-numbers-container {
+    padding-top: 4rem;
+  }
+}
+
+.line-num {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7; /* Synchronized with code block wrapping */
+  color: var(--color-line-num);
+  text-align: right;
+  padding-right: 10px;
+  width: 100%;
+}
+
+/* --- Editor Viewport Spacing --- */
+#content-container {
+  padding-bottom: 8rem !important; /* Padding at bottom so content is scrollable past the view */
+}
+
+/* --- Editor File Switcher Panels --- */
+.code-block {
+  display: none;
+}
+
+.code-block.active {
+  display: block;
+}
+
+/* Syntax Highlighting Colors */
+.text-syntax-comment { color: var(--color-syntax-comment); font-style: italic; }
+.text-syntax-amber { color: #f59e0b; }
+.text-syntax-teal { color: var(--color-secondary); }
+.text-syntax-blue { color: var(--color-tertiary); }
+.text-syntax-green { color: #10b981; }
+.text-syntax-string, .string { color: var(--color-syntax-string); }
+
+/* Code links styling */
+.code-link {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  transition: color 0.12s ease;
+}
+
+.code-link:hover {
+  color: var(--color-primary);
+}
+
+/* Responsive sidebar */
+@media (max-width: 768px) {
+  #ide-sidebar {
+    display: flex !important;
+    position: fixed;
+    top: 36px;
+    bottom: 24px;
+    left: -240px;
+    z-index: 40;
+    transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 16px rgba(0,0,0,0.5);
+  }
+
+  body.sidebar-open #ide-sidebar {
+    left: 0;
+  }
+}
+
+/* --- GitHub Calendar Image Styling --- */
+.github-calendar-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* In dark mode, invert the default light-gray empty tiles to dark gray, keeping red tiles red */
+html.dark .github-calendar-img {
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.35) contrast(1.1);
+}
+
+
+
+
